@@ -1,6 +1,8 @@
 # tf_js_demo
-Tensorflow JavaScript Demo
+Tensorflow JavaScript Demo - simple react application that localizes and identifies multiple objects in client's video stream.
+
+Used model detects objects defined in the COCO dataset, which is a large-scale object detection, segmentation, and captioning dataset. The model is capable of detecting 80 classes of objects (SSD stands for Single Shot MultiBox Detection).
 
 ## Tech Stack
-- React
-- TensorFlow.js
+- ReactJS, react-webcam
+- TensorFlow.js and it's Object Detection (coco-ssd) model

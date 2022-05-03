@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useRef, useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
-import * as cocossd from "@tensorflow-models/coco-ssd";
+import * as cocossd from "@tensorflow-models/coco-ssd"; //https://www.npmjs.com/package/@tensorflow-models/coco-ssd
 import Webcam from "react-webcam";
 import { drawRect } from "./utils";
 
@@ -13,32 +13,32 @@ function App() {
     const model = await cocossd.load();
     // Loop detector
     setInterval(() => {
-      detect(model);
+      detector(model);
     }, 10);
   };
 
-  const detect = async(model) => {
+  const detector = async(model) => {
     if(
       typeof webcamRef.current !== 'undefined' &&
       webcamRef.current !== null &&
       webcamRef.current.video.readyState === 4
     ) {
-      // Get Video Properties
-      const video = webcamRef.current.video;
-      const videoWidth = webcamRef.current.video.videoWidth;
-      const videoHeight = webcamRef.current.video.videoHeight;
+      // Get Input Data Properties
+      const vidStream = webcamRef.current.video;
+      const streamWidth = webcamRef.current.video.videoWidth;
+      const streamHeight = webcamRef.current.video.videoHeight;
 
       // Set video width
-      webcamRef.current.video.width = videoWidth;
-      webcamRef.current.video.height = videoHeight;
+      webcamRef.current.video.width = streamWidth;
+      webcamRef.current.video.height = streamHeight;
 
       // Set canvas height and width
-      canvasRef.current.width = videoWidth;
-      canvasRef.current.height = videoHeight;
+      canvasRef.current.width = streamWidth;
+      canvasRef.current.height = streamHeight;
 
       // Make Detections
-      const obj = await model.detect(video);
-      console.log(obj);
+      const obj = await model.detect(vidStream);
+      // console.log(obj);
 
       // Draw mesh
       const ctx = canvasRef.current.getContext("2d");
